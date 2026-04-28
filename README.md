@@ -32,7 +32,7 @@ Akan-Name-Generator/
 
 
 
-[View on GitHub Pages]
+[View on GitHub Pages] https://ericgitika.github.io/Akan-name-generator/
 
 
 ## Copyright and License
