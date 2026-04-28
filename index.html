@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Akan Name Generator</title>
+        
+  <link rel="stylesheet" href="styles.css"/></head>
+</head>
+<body>
+  
+  <div class="box">
+
+    <!-- ── Header: title & description ── -->
+     
+    <header class="site-header">
+      <div class="header-accent"></div>
+      <h1 class="site-title">Akan Name Generator</h1>
+      <p class="site-description">
+        Welcome to the Akan Name Generator! This tool allows you to discover your Akan name based on your birth date
+    </header>
+    <!-- ── Main card ── -->
+    <main class="card">
+
+      <!-- Input form -->
+      <sec class="form-section" aria-label="Birthdate form">
+        
+        <div class="field-group">
+          <label class="field-label">Date of Birth</label>
+           <div class="date-row">
+            <div class="date-field">
+              <input
+                type="number"
+                id="day"
+                class="input"
+                placeholder="DD"
+                min="1"
+                max="31"
+                aria-label="Day"
+              />
+              <span class="date-hint">Day</span>
+            </div>
+              <div class="date-field">
+              <input
+                type="number"
+                id="month"
+                class="input"
+                placeholder="MM"
+                min="1"
+                max="12"
+                aria-label="Month"
+              />
+              <span class="date-hint">Month</span>
+            </div>
+                <div class="date-field">
+              <input
+                type="number"
+                id="year"
+                class="input"
+                placeholder="YYYY"
+                min="1"
+                max="9999"
+                aria-label="Year"
+              />
+              <span class="date-hint">Year</span>
+            </div>
+             </div>
+          <!-- Validation error for date fields -->
+          <p class="error-msg" id="date-error" role="alert"></p>
+        </div>
+        <!-- Gender -->
+        <div class="field-group">
+          <label class="field-label" for="gender">Gender</label>
+          <select id="gender" class="input select">
+            <option value="">— Select gender —</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <!-- Validation error for gender field -->
+          <p class="error-msg" id="gender-error" role="alert"></p>
+        </div>
+        <button id="submit-btn" class="btn" onclick="calculate()">
+          Find My Akan Name
+        </button>
+              <!-- Result display section (hidden until calculation runs) -->
+      <section class="result" id="result" aria-live="polite" aria-label="Result">
+        <div class="result-inner">
+          <p class="result-label">Your Akan Name</p>
+          <h2 class="result-name" id="result-name"></h2>
+          <p class="result-day"  id="result-day"></p>
+          <p class="result-meaning" id="result-meaning"></p>
+        </div>
+      </section>
+   </main>
+    <footer class="site-footer">
+      <p>© 2026 Akan Name Generator. All rights reserved.</p>
+    </footer>
+  </div>   
+<script src="script.js"></script>
+</body>
+</html>
+  

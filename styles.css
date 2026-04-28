@@ -1,0 +1,249 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* ── Global ────────────────────────────────────────────────────────────────── */
+body {
+  background-color: rgb(218, 180, 123);
+  color: black;
+  font-size: 5px;
+  line-height: 23px;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: o;
+}
+
+.site-description{
+    font-style:normal;
+    margin-top: 10px;
+}
+/* ── Page wrapper ──────────────────────────────────────────────────────────── */
+.page-wrapper {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Two-column row ────────────────────────────────────────────────────────── */
+.content-row {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: stretch;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.card {
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  border-left: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  overflow: hidden;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+.site-header {
+  text-align: center;
+}
+
+.header-accent {
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    #c9933a 33%,
+    #2e6b3e 33% 66%,
+    #c9933a 66%
+  );
+  margin-bottom: 1.25rem;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--clr-primary-dk);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+.site-description {
+  font-size: 0.92rem;
+  color: var(--clr-text-muted);
+  max-width: 38ch;
+  margin: 0 auto;
+}
+
+/* ── Form section ──────────────────────────────────────────────────────────── */
+.form-section {
+  padding: 2rem;
+}
+
+/* ── Field group ───────────────────────────────────────────────────────────── */
+.field-group {
+  margin-bottom: 1.4rem;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Date row ──────────────────────────────────────────────────────────────── */
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 0.75rem;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.date-hint {
+  font-size: 0.72rem;
+  color: var(--clr-text-muted);
+  text-align: center;
+}
+
+/* ── Inputs & select ───────────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  background: bisque;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  appearance: none;
+}
+
+.input:focus {
+  border-color: var(--clr-border-focus);
+  box-shadow: 0 0 0 3px rgba(181, 129, 58, 0.15);
+}
+
+.input::placeholder {
+  color: #c2b49a;
+}
+
+/* Custom dropdown arrow */
+.select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6a52' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* ── Validation errors ─────────────────────────────────────────────────────── */
+.error-msg {
+  font-size: 15px;
+  color: red;
+  font-style: italic;
+  margin-top: 0.35px;
+  min-height: 1.1px;
+}
+
+/* ── Button ────────────────────────────────────────────────────────────────── */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 0.5rem;
+  background-color: white;
+  color: burlywood;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.18s, transform 0.12s;
+}
+
+.btn:hover {
+  background-color:bisque;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ── Result section ────────────────────────────────────────────────────────── */
+.result {
+  display: none;
+  background-color: white;
+  border-top: 14px;
+}
+
+.result.visible {
+  display: block;
+  animation: slideDown 0.35s ease;
+}
+
+
+.result-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.result-name {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 35px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 15px;
+  margin-top: 6px;
+}
+
+.result-day {
+  font-size: 0.9rem;
+  color: black;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: black;
+  margin-top: 10%;
+  background-color: bisque
+
+}
+
+
+  .card {
+    border-left: none;
+    border-top: 1px;
+  }
+
