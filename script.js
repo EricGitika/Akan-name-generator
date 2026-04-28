@@ -1,42 +1,15 @@
+// ─── Akan name table ──────────────────────────────────────────────────────────
 const akanNames = [
-  {
-    day: "Sunday",
-    male: "Kwasi",
-    female: "Akosua",
-  },
-  {
-    day: "Monday",
-    male: "Kwadwo",
-    female: "Adwoa",
-  },
-  {
-    day: "Tuesday",
-    male: "Kwabena",
-    female: "Abenaa",
-  },
-  {
-    day: "Wednesday",
-    male: "Kwaku",
-    female: "Akua",
-  },
-  {
-    day: "Thursday",
-    male: "Yaw",
-    female: "Yaa",
-  },
-  {
-    day: "Friday",
-    male: "Kofi",
-    female: "Afua",
-  },
-  {
-    day: "Saturday",
-    male: "Kwame",
-    female: "Ama",
-  },
+  { day: "Sunday", male: "Kwasi", female: "Akosua" },
+  { day: "Monday", male: "Kwadwo", female: "Adwoa" },
+  { day: "Tuesday", male: "Kwabena", female: "Abenaa" },
+  { day: "Wednesday", male: "Kwaku", female: "Akua" },
+  { day: "Thursday", male: "Yaw", female: "Yaa" },
+  { day: "Friday", male: "Kofi", female: "Afua" },
+  { day: "Saturday", male: "Kwame", female: "Ama" },
 ];
 
-//  Retrieve user input 
+// ─── Step 1: Retrieve user input ──────────────────────────────────────────────
 function getInputs() {
   const day = parseInt(document.getElementById("day").value, 10);
   const month = parseInt(document.getElementById("month").value, 10);
@@ -46,7 +19,7 @@ function getInputs() {
   return { day, month, year, gender };
 }
 
-//  Validate input 
+// ─── Step 2: Validate input ────────────────────────────────────────────────────
 function validate(day, month, year, gender) {
   // Clear any previous error messages
   document.getElementById("date-error").textContent = "";
@@ -66,6 +39,15 @@ function validate(day, month, year, gender) {
     document.getElementById("date-error").textContent =
       "Please enter a valid year.";
     isValid = false;
+  } else {
+    // Check the day is valid for the given month and year.
+    // new Date(year, month, 0).getDate() returns the last valid day of that month.
+    const maxDays = new Date(year, month, 0).getDate();
+    if (day > maxDays) {
+      document.getElementById("date-error").textContent =
+        "Month " + month + "/" + year + " only has " + maxDays + " days.";
+      isValid = false;
+    }
   }
 
   if (gender === "") {
@@ -77,6 +59,9 @@ function validate(day, month, year, gender) {
   return isValid;
 }
 
+// ─── Step 3: Calculate the day of the week ────────────────────────────────────
+// Formula: d = (floor(CC/4) - 2*CC - 1) + floor(5*YY/4) + floor(26*(MM+1)/10) + DD
+// January and February are treated as months 11 and 12 of the previous year.
 function getDayOfWeek(day, month, year) {
   if (month <= 2) {
     month += 10;
@@ -85,25 +70,25 @@ function getDayOfWeek(day, month, year) {
     month -= 2;
   }
 
-  const CC = Math.floor(year / 100); // first two digits of the year
-  const YY = year % 100; // last two digits of the year
+  const CC = Math.floor(year / 100); // first two digits of the year e.g 1989 → 19
+  const YY = year % 100; // last two digits of the year  e.g 1989 → 89
   const MM = month;
   const DD = day;
 
-  // Apply the formula
   const d =
-    (Math.floor(4 * CC - 2 * CC - 1) +
-      Math.floor((45 * YY) / 10) +
+    (Math.floor(CC / 4) -
+      2 * CC -
+      1 +
+      Math.floor((5 * YY) / 4) +
       Math.floor((26 * (MM + 1)) / 10) +
       DD) %
     7;
 
-  // Ensure result is non-negative (JS % can return negative for negative numbers)
+  // Ensure result is non-negative
   return ((d % 7) + 7) % 7;
 }
 
-// Match day index to Akan name
-// Formula returns 0 = Sunday through 6 = Saturday
+// ─── Step 4: Match day index to Akan name ─────────────────────────────────────
 function getAkanName(dayIndex, gender) {
   const entry = akanNames[dayIndex];
   const name = gender === "male" ? entry.male : entry.female;
@@ -111,38 +96,31 @@ function getAkanName(dayIndex, gender) {
   return {
     name: name,
     dayName: entry.day,
-    meaning: entry.meaning,
   };
 }
 
-// Display the result on the webpage 
-function displayResult(name, dayName, meaning) {
+// ─── Step 5: Display the result on the webpage ────────────────────────────────
+function displayResult(name, dayName) {
   document.getElementById("result-name").textContent = name;
   document.getElementById("result-day").textContent = "Born on a " + dayName;
-  document.getElementById("result-meaning").textContent = meaning;
 
   const resultEl = document.getElementById("result");
 
-  // Remove and re-add the class so the animation replays on each submission
   resultEl.classList.remove("visible");
   setTimeout(function () {
     resultEl.classList.add("visible");
   }, 10);
 }
 
+// ─── Main: called by the button ───────────────────────────────────────────────
 function calculate() {
-  // get inputs
   const { day, month, year, gender } = getInputs();
 
-  // validate; stop here if anything is invalid
   if (!validate(day, month, year, gender)) return;
 
-  //  calculate day of week
   const dayIndex = getDayOfWeek(day, month, year);
 
-  // match to Akan name
-  const { name, dayName} = getAkanName(dayIndex, gender);
+  const { name, dayName } = getAkanName(dayIndex, gender);
 
-  //display the result
   displayResult(name, dayName);
 }
