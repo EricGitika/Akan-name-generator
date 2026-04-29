@@ -85,7 +85,7 @@ function getDayOfWeek(day, month, year) {
     7;
 
   // Ensure result is non-negative
-  return ((d % 7) + 7) % 7;
+ return ((d % 7) + 7 - 1) % 7;
 }
 
 // ─── Step 4: Match day index to Akan name ─────────────────────────────────────
